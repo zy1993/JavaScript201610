@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var ary=[20,14,3,21,6];
+    //功能：把别人给的乱序数组，变成有序数组，并且返回；
+    function quickSort(ary){ //这里的ary是形参
+        //5.停止拆分的条件
+        if(ary.length<=1){
+            return ary;
+        }
+       // 1）找中间位置
+        var num=Math.floor(ary.length/2);
+        //2)找中间位置对应的值
+        var numValue=ary.splice(num,1)[0];
+        //3)拿数组中的每项，跟中间值进行比较，大，right【】； 小，left【】；
+        var left=[],
+        right=[];
+        for(var i=0; i<ary.length; i++){
+            var cur=ary[i];
+            if(cur<numValue){
+                left.push(cur);
+            }else{
+                right.push(cur);
+            }
+        }
+        return quickSort(left).concat([numValue],quickSort(right));
+    }
+    console.log(quickSort(ary)); //ary 是实参
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //需求：去重
+    var ary=[1,2,3,4,1,1,2,2,3,4,4];
+    //思路1：双循环
+    /*for(var i=0; i<ary.length; i++){
+        var cur=ary[i];
+        for(j=i+1; j<ary.length; j++){
+            if(cur==ary[j]){
+                ary.splice(j,1);
+                j--; //预防数组塌陷；
+            }
+        }
+    }*/
+    //思路2：新数组
+    /*var ary2=[];
+    for(var i=0; i<ary.length; i++){
+        //当新数组中没有这一项的时候，把这一项放入新数组
+        if(ary2.indexOf(ary[i])===-1){
+            ary2.push(ary[i])
+        }
+    }*/
+    //思路3：sort排序
+    /*ary.sort(function(a,b){return a-b});
+    for(var i=0; i<ary.length; i++){
+        if(ary[i]===ary[i+1]){
+            ary.splice(i,1);
+            i--; //预防数组塌陷
+        }
+    }*/
+    //思路4：看对象中是否有重复的，如果有，删除数组该项
+    /*var obj={};
+    for(var i=0; i<ary.length; i++){
+        var cur=ary[i];
+        if(obj[cur]==cur){
+            ary.splice(i,1);
+            i--;
+        }
+        obj[cur]=cur;
+    }*/
+    //思路5：利用对象不重名的特性 不仅可以去重-属性名；而且属性值还记录了当前元素出现的次数
+    var obj={};
+    for(var i=0; i<ary.length; i++){
+        var cur=ary[i];
+        /*if(obj[cur]){
+            obj[cur]++;
+            continue;
+        }
+        obj[cur]=1; //给对象添加数组中的该项内容，并赋值为1；*/
+        if(obj[cur]){
+            obj[cur]++;
+        }else{
+            obj[cur]=1;
+        }
+    }
+
+</script>
+</body>
+</html>

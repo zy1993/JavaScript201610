@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
+        body{
+            font-size: 30px;
+        }
+        li{
+            height: 40px;
+            line-height: 40px;
+        }
+        li span{
+            display: inline-block;
+            width: 120px;
+        }
+        li.bg0{
+            background: lightgoldenrodyellow;
+        }
+        li.bg1{
+            background: lightcyan;
+        }
+        li.bg2{
+            background: lightgreen;
+        }
+        li.changeColor{
+            background: darkmagenta;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<ul></ul>
+<script>
+    //双重循环：当外面循环一次的时候，要等里面所有的代码都执行完，才会开始下一次的循环；所以，外面走一次的时候，里面走了9次
+    var oUl=document.getElementsByTagName('ul')[0];
+    var aLi=oUl.getElementsByTagName('li');
+    var str='';
+    var oldColor=null;
+    for(var i=1; i<=9; i++){ //决定了行数 li
+        str+='<li>';
+        for(var j=1; j<=i; j++){//决定了列数 span
+            str+='<span>'+(j+'*'+i+'='+i*j)+'</span>'
+           // document.write(j+'*'+i+'='+j*i+'\t')
+        }
+        str+='</li>';
+    }
+    oUl.innerHTML=str;
+    //隔行换色
+    for(var i=0; i<aLi.length; i++){
+        aLi[i].className='bg'+i%3;
+        aLi[i].onmouseover=function(){
+            oldColor=this.className;//在改颜色之前，一定要保存自己以前的颜色；
+            this.className='changeColor';
+        };
+        aLi[i].onmouseout=function(){
+          this.className=oldColor;
+        };
+    }
+</script>
+</body>
+</html>

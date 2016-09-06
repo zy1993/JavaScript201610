@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        body{
+            padding:10px;
+        }
+        .box{
+            width: 456px;
+            margin:10px;
+            float: left;
+        }
+        .box ul{
+            width: 100%;
+            height: 40px;
+            clear: both;
+        }
+        .box ul li{
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            float: left;
+            background: #ccc;
+            border: 1px solid lightblue;
+        }
+        .box ul li.on{
+            background: lightgreen;
+        }
+        .box div{
+            width: 100%;
+            height: 200px;
+            display: none;
+            background: lightgreen;
+            top:-1px;
+            position: relative;
+        }
+        .box div.show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li class="box">
+        <ul>
+            <li class="on">按钮1</li>
+            <li>按钮2</li>
+            <li>按钮3</li>
+        </ul>
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </li>
+    <li class="box" style="width:304px;">
+        <ul>
+            <li class="on">按钮1</li>
+            <li>按钮2</li>
+            <li>按钮3</li>
+        </ul>
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </li>
+    <li class="box" style="width: 608px;">
+        <ul>
+            <li class="on">按钮1</li>
+            <li>按钮2</li>
+            <li>按钮3</li>
+            <li>按钮4</li>
+        </ul>
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+        <div>内容4</div>
+    </li>
+    <li class="box">
+        <ul>
+            <li class="on">按钮1</li>
+            <li>按钮2</li>
+            <li>按钮3</li>
+        </ul>
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </li>
+    <li class="box">
+        <ul>
+            <li class="on">按钮1</li>
+            <li>按钮2</li>
+            <li>按钮3</li>
+        </ul>
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </li>
+    <li class="box">
+        <ul>
+            <li class="on">按钮1</li>
+            <li>按钮2</li>
+            <li>按钮3</li>
+        </ul>
+        <div class="show">内容1</div>
+        <div>内容2</div>
+        <div>内容3</div>
+    </li>
+</ul>
+<script>
+    var oUl=document.getElementsByTagName('ul')[0];
+    var aLi=oUl.children;
+    for(var i=0; i<aLi.length; i++){
+        tab(aLi[i]);
+    }
+    tab(aLi[1],1); //覆盖了上面调用；
+    tab(aLi[2],3);
+    /*
+    * tab:选项卡
+    * @ele:公共父级
+    * @n:让第几个按钮和对应div点亮
+    * */
+
+    function tab(ele,n){
+        var aLi=ele.getElementsByTagName('li');
+        var aDiv=ele.getElementsByTagName('div');
+        n=n||0;
+        innerTab(n);
+        function innerTab(num){
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].className='';
+                aDiv[i].className='';
+            }
+            console.log(num)
+            aLi[num].className='on';
+            aDiv[num].className='show';
+        }
+        for(var i=0; i<aLi.length; i++){
+            aLi[i].index=i;
+            aLi[i].onclick=function(){
+                //当每个按钮发生点击事件的时候，让所有的按钮都变灭，让当前有点击事件的按钮变亮；同理，让所有的div都变灭，让当前按钮对应的div变亮
+                /*for(var i=0; i<aLi.length; i++){
+                    aLi[i].className='';
+                    aDiv[i].className='';
+                }
+                aLi[this.index].className='on';
+                aDiv[this.index].className='show';*/
+                innerTab(this.index);
+            }
+        }
+    }
+</script>
+</body>
+</html>
